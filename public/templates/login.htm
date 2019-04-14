@@ -1,0 +1,29 @@
+<header class="banner navbar navbar-default navbar-static-top non-absolute ng-scope header-custom" role="banner">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/" title="Alhokair Fashion Retail">
+            <img src="http://www.fawazalhokairfashion.com/wp-content/uploads/2019/03/Fawaz-Alhokair-Company-Logo_OL.png" alt="Fawaz Alhokair Fashion Logo" width="313" height="43" class="hidden-xs">
+        </a>
+    </div>
+</header>
+<div class="container">
+
+    <div class="col-sm-6 col-sm-offset-6 offset-md-3">
+        <h1 class="display-4">Login</h1>
+        <hr/>
+        <div ng-if="errormsg" class="alert alert-danger">{{errormsg}}</div>
+        <div class="login-form" style="margin-top:80px;">
+
+            <div class="form-group">
+                <label class="font-weight-bold">Username</label>
+                <input placeholder="email" type="text" class="form-control" name="username" ng-model="useremail">
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Password</label>
+                <input placeholder="Password"  type="password" class="form-control" name="password" ng-model="userpassword">
+            </div>
+            <button ng-click="login()" type="submit" class="btn btn-outline-secondary">Login</button>
+        </div>
+        <hr>
+    </div>
+</div>
+<div ng-include="'templates/footer.htm'"></div>

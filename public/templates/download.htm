@@ -1,0 +1,51 @@
+<div ng-include="'templates/header.htm'"></div>
+	<section>
+        <div class="page-header ">
+        <h1 class="display-4">
+        	<span class="d-inline-block ml-auto">List Videos</span>
+        	<a class="float-right btn btn-outline-secondary cc_b" href="/download/new">Add New Video</a>
+        </h1>
+        <hr/>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 ">
+        	<table class="table table-hover table-bordered">
+			    <thead>
+			      <tr>
+			        <th>S.No</th>
+			        <th>Icon</th>
+			        <th>Title</th>
+			        <th>category</th>
+			        <th>Desc</th>
+			        <th>Publish Status</th>
+			        <th>Department</th>
+			        <th>Actions</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr ng-repeat="download in download_videos">
+			      	<td>{{$index+1}}</td>
+			        <td><img style="width:50px; height: 50px;" src="{{domainurl_img}}{{download.download_icon}}" /></td>
+			        <td>{{download.title}}</td>
+			        <td>{{download.category}}</td>
+			        <td>{{download.description}}</td>
+			        <td>
+			        	<a ng-if="usertype == 2 && download.publish_status == 1" href="/download/unpublish/{{download.download_id}}" class="badge badge-success" >Unpublish</a>
+			        	<a ng-if="usertype == 2 && download.publish_status == 0"  href="/download/publish/{{download.download_id}}" class="badge badge-warning" >Publish</a>
+			        	<span ng-if="usertype == 1" >
+			        		<span class="badge badge-success" ng-if="download.publish_status == 1" >Published</span>
+			        		<span class="badge badge-success" ng-if="download.publish_status == 0" >Not Publish</span>
+				        </span>
+			        </td>
+			        <td>{{download.department}}</td>
+			        <td>
+			        	<a href='/download/edit/{{download.download_id}}' class="fa fa-edit"></a>
+			        	<a href='/download/delete/{{download.download_id}}' class="fa fa-trash-o"></a>
+			        </td>
+			      </tr>
+			    </tbody>
+			</table>
+        </div>
+    </div>
+	</section>
+<div ng-include="'templates/footer.htm'"></div>

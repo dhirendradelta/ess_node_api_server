@@ -1,0 +1,23 @@
+<header class="navbar navbar-default navbar-expand-md header-custom" role="banner">
+        <a class="navbar-brand" href="/" title="Alhokair Fashion Retail">
+            <img src="http://www.fawazalhokairfashion.com/wp-content/uploads/2019/03/Fawaz-Alhokair-Company-Logo_OL.png" alt="Fawaz Alhokair Fashion Logo" width="313" height="43" class="hidden-xs">
+        </a>
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" ng-class="{active: $route.current.activetab == 'dashboard'}">
+            <a class="nav-link" href="/">Dashboard </a>
+          </li>
+          <li class="nav-item" ng-class="{active: $route.current.activetab == 'content'}">
+            <a class="nav-link" href="/content">Content</a>
+          </li>
+          <li class="nav-item" ng-class="{active: $route.current.activetab == 'download'}">
+            <a class="nav-link" href="/download">Download</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="btn btn-outline-danger" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+</header>

@@ -1,0 +1,44 @@
+.header-custom {
+    background: #40454e;
+    margin-top: -80px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+}
+.header-custom a{
+	color: #8e95a2;
+	text-decoration: none;
+}
+.header-custom .nav-link:focus, 
+.header-custom .nav-link:hover,
+.header-custom .nav-link:active{
+	text-decoration: underline;
+	color: #fff;
+}
+.header-custom .nav-item.active a{
+	text-decoration: underline;
+	color: #fff;	
+}
+.cc_b{
+	margin-top: 14px;
+}
+.display-4 {
+    font-size: 2.5rem !important;
+}
+section.custom {
+	min-height: 400px;
+}
+table thead {color: #fff; background: #40454e;}
+footer {
+    background: #40454e;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    padding: 20px;
+    margin-top: 80px;
+}
+footer p {
+	color: #69768d; 
+	font-size: 12px;     
+	margin-bottom: 0px;
+}
