@@ -36,7 +36,7 @@ const jwt_signin = (req, res, user)=> {
 	check:  true,
   	};
   	var token = jwt.sign(payload, config.secretKey, {
-        expiresIn: 60*60
+        expiresIn: '365d'
   	});
   	
   	res.status(200).json({

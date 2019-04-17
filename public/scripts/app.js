@@ -181,7 +181,8 @@ app.controller('loginCtrl', ['$scope', '$http', '$location',  function ($scope, 
     $scope.useremail = "admin@ess.com"
     $scope.userpassword = "123456"
     $scope.login = function(){
-        $scope.errormsg = ''
+        document.getElementById("loader").style.display = 'block';
+	$scope.errormsg = ''
         $scope.formdata = {"email": $scope.useremail, "password": $scope.userpassword}
         //$http.post("http://localhost:3000/api/user/login", $scope.formdata)
         $http({
@@ -190,6 +191,7 @@ app.controller('loginCtrl', ['$scope', '$http', '$location',  function ($scope, 
             data: $.param($scope.formdata),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(res) {
+            document.getElementById("loader").style.display = 'none';
             var response = res.data
             console.log(response)
             if(response.status){
@@ -217,6 +219,7 @@ app.controller('downloadCtrl', ['$scope', '$route', '$http', 'domainurl_img', fu
     $scope.download_category = [];
     $scope.domainurl_img = domainurl_img;
     $scope.usertype = window.localStorage.getItem('usertype');
+    document.getElementById("loader").style.display = "block";
     $http({
         method: 'GET',
         url: baseurl+'download/category',
@@ -237,6 +240,7 @@ app.controller('downloadCtrl', ['$scope', '$route', '$http', 'domainurl_img', fu
             'access-token': window.localStorage.getItem('token')
         }
     }).then(function(res) {
+	document.getElementById("loader").style.display = "none";
         var response = res.data
         console.log(response)
         $scope.download_videos = response.video;
@@ -294,6 +298,7 @@ app.controller('downloadNewCtrl', ['$scope', '$route', '$http', '$location', 'do
     });
 
     $scope.submitVideo = function(){
+        document.getElementById("loader").style.display = 'block';
         console.log($scope.formdata);
         $http({
             method: 'POST',
@@ -304,6 +309,7 @@ app.controller('downloadNewCtrl', ['$scope', '$route', '$http', '$location', 'do
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementByid("loader").style.display = 'none';
             var response = res.data
             console.log(response)
             if(response.status){
@@ -319,7 +325,7 @@ app.controller('downloadNewCtrl', ['$scope', '$route', '$http', '$location', 'do
         var image = $("#downloadIconField")[0].files[0];
         var formdata = new FormData();
         formdata.append('image', image);
-
+	document.getElementById("loader").style.display = "block";
         $http({
             method: 'POST',
             url: baseurl+'upload',
@@ -330,6 +336,7 @@ app.controller('downloadNewCtrl', ['$scope', '$route', '$http', '$location', 'do
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementById("loader").style.display = 'none';
             var response = res.data
             console.log(response)
             $scope.formdata.download_icon = response.filename;
@@ -339,7 +346,7 @@ app.controller('downloadNewCtrl', ['$scope', '$route', '$http', '$location', 'do
         var image = $("#downloadVideoField")[0].files[0];
         var formdata = new FormData();
         formdata.append('image', image);
-
+	document.getElementById("loader").style.display = 'block';
         $http({
             method: 'POST',
             url: baseurl+'download/upload',
@@ -350,6 +357,7 @@ app.controller('downloadNewCtrl', ['$scope', '$route', '$http', '$location', 'do
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementById("loader").style.display = "none";
             var response = res.data
             console.log(response)
             $scope.formdata.download_video = response.filename;
@@ -421,6 +429,7 @@ app.controller('downloadEditCtrl', ['$scope', '$routeParams', '$http', '$locatio
     });
 
     $scope.submitVideo = function(){
+        document.getElementById("loader").style.display = "block";
         console.log($scope.formdata);
         $http({
             method: 'PUT',
@@ -431,6 +440,7 @@ app.controller('downloadEditCtrl', ['$scope', '$routeParams', '$http', '$locatio
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementById("loader").style.display = "none";
             var response = res.data
             console.log(response)
             if(response.status){
@@ -443,6 +453,7 @@ app.controller('downloadEditCtrl', ['$scope', '$routeParams', '$http', '$locatio
 
 
     $scope.uploadIcon = function(){
+	document.getElementById("loader").style.display = "block";
         var image = $("#downloadIconField")[0].files[0];
         var formdata = new FormData();
         formdata.append('image', image);
@@ -457,12 +468,14 @@ app.controller('downloadEditCtrl', ['$scope', '$routeParams', '$http', '$locatio
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementById("loader").style.display = "none";
             var response = res.data
             console.log(response)
             $scope.formdata.download_icon = response.filename;
         });
     }
     $scope.uploadVideo = function(){
+	document.getElementById("loader").style.display = "block";
         var image = $("#downloadVideoField")[0].files[0];
         var formdata = new FormData();
         formdata.append('image', image);
@@ -477,6 +490,7 @@ app.controller('downloadEditCtrl', ['$scope', '$routeParams', '$http', '$locatio
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementById("loader").style.display = "none"
             var response = res.data
             console.log(response)
             $scope.formdata.download_video = response.filename;
@@ -537,6 +551,7 @@ app.controller('announcementCtrl', ['$scope', '$route', '$http', 'domainurl_img'
     $scope.announces = []
     $scope.domainurl_img = domainurl_img
     $scope.usertype = window.localStorage.getItem('usertype')
+    document.getElementById("loader").style.display = "block";
     $http({
         method: 'GET',
         url: baseurl+'content/all',
@@ -545,6 +560,7 @@ app.controller('announcementCtrl', ['$scope', '$route', '$http', 'domainurl_img'
             'access-token': window.localStorage.getItem('token')
         }
     }).then(function(res) {
+	document.getElementById("loader").style.display = "none";
         var response = res.data
         console.log(response)
         $scope.announces = response.content
@@ -590,7 +606,7 @@ app.controller('announcementNewCtrl', ['$scope', '$route', '$http', '$location',
     }).then(function(res) {
         var response = res.data
         console.log(response)
-        $scope.polycats = response.polycats
+        $scope.polycats = response.category
     });
 
     $http({
@@ -620,6 +636,10 @@ app.controller('announcementNewCtrl', ['$scope', '$route', '$http', '$location',
     });
 
     $scope.submitAnnouncement = function(){
+	document.getElementById("loader").style.display = "block";
+        if($scope.formdata.contenttype == 3){
+		$scope.formdata.catid = 0
+ 	}
         console.log($scope.formdata);
         $http({
             method: 'POST',
@@ -630,6 +650,7 @@ app.controller('announcementNewCtrl', ['$scope', '$route', '$http', '$location',
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementById("loader").style.display = "none";
             var response = res.data
             console.log(response)
             if(response.status){
@@ -641,6 +662,7 @@ app.controller('announcementNewCtrl', ['$scope', '$route', '$http', '$location',
     }
 
     $scope.uploadFile = function(){
+	document.getElementById("loader").style.display = "block";
         var image = $("#myFileField")[0].files[0];
         var formdata = new FormData();
         formdata.append('image', image);
@@ -655,6 +677,7 @@ app.controller('announcementNewCtrl', ['$scope', '$route', '$http', '$location',
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementById("loader").style.display = "none";
             var response = res.data
             console.log(response)
             $scope.formdata.content_image = response.filename;
@@ -726,6 +749,7 @@ app.controller('announcementEditCtrl', ['$scope', '$routeParams', '$http', '$loc
     });
 
     $scope.updateAnnouncement = function(){
+	document.getElementById("loader").style.display = "block";
         console.log($scope.formdata);
         $http({
             method: 'PUT',
@@ -736,6 +760,7 @@ app.controller('announcementEditCtrl', ['$scope', '$routeParams', '$http', '$loc
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementById("loader").style.display = "none";
             var response = res.data
             console.log(response)
             if(response.status){
@@ -747,6 +772,7 @@ app.controller('announcementEditCtrl', ['$scope', '$routeParams', '$http', '$loc
     }
 
     $scope.uploadFile = function(){
+	document.getElementById("loader").style.display = "block";
         var image = $("#myFileField")[0].files[0];
         var formdata = new FormData();
         formdata.append('image', image);
@@ -761,6 +787,7 @@ app.controller('announcementEditCtrl', ['$scope', '$routeParams', '$http', '$loc
                 'access-token': window.localStorage.getItem('token')
             }
         }).then(function(res) {
+	    document.getElementById("loader").style.display = "none";
             var response = res.data
             console.log(response)
             $scope.formdata.content_image = response.filename;

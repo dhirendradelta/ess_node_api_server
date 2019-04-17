@@ -8,9 +8,9 @@ const apiRoutes = express.Router();
 apiRoutes.get('/category', jwt_auth, (req,res)=>{
 	getPolicies(function(err, rows){
  		if(err){
- 			res.status(500).json({status: 0, msg: 'error'})
+ 			res.status(500).json({status: 0, msg: err})
  		}else{
- 			res.status(200).json({status:1, policies: rows})
+ 			res.status(200).json({status:1, category: rows})
  		}
  	});
 });

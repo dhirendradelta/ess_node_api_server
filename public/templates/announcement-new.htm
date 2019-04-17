@@ -23,12 +23,19 @@
         			<button ng-click="uploadFile()" class = "btn btn-outline-secondary mt-2">Upload File</button>
         		</div>
 	            <div class="form-group">
-	                <label>Content Type</label>
+	                <label>Content Type</label>{{formdata.content_type}}
 	                <select class="form-control" ng-model="formdata.content_type">
 	                	<option value="">--Select Content Type--</option>
 	                	<option value="{{content.id}}" ng-repeat="content in contenttypes">{{content.name}}</option>
 	                </select>
 	            </div>
+                    <div ng-if="formdata.content_type == '3'">
+                        <label>Select Category</label>
+			<select class="form-control" ng-model="formdata.catid">
+				<option value="">--select category--</option>
+				<option value="{{cat.catid}}" ng-repeat="cat in polycats">{{cat.catname}}</option>
+			</select> 
+                    </div>
 	           
 	            <div class="form-group">
 	                <label>Country</label>

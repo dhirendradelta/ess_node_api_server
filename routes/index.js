@@ -7,6 +7,8 @@ const contenttypesRoute = require('./contenttypes')
 const countryRoute = require('./country')
 const policyRoute = require('./policy')
 const downloadRoute = require('./download')
+const complainRoute = require('./complain')
+//const leaveRoute = require('./leave');
 const path = require('path');
 
 module.exports = function(app) {
@@ -18,7 +20,11 @@ module.exports = function(app) {
 	app.use('/api/country', countryRoute.apiRoutes);
 	app.use('/api/policy', policyRoute.apiRoutes);
 	app.use('/api/download', downloadRoute.apiRoutes);
-	
+	app.use('/api/complain', complainRoute.apiRoutes);	
+	//app.use('/api/leave', leaveRoute.apiRoutes);
+        app.get('/test', function(req, res){
+		res.status(200).json({status: 1, msg: 'hi'});
+	})
 	app.get('*', function(req, res) {
 		const loc = path.join(process.cwd(),"public/index.html");
 		console.log(loc)

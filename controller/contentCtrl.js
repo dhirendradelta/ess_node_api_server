@@ -9,6 +9,10 @@ var contentCtrl = {
 		var query = `select * from content where content_type = ? and deptt_id = ? and countryid = ? and publish_status = 1 and status = 1`;
 		return db.query(query, [3, depttid, countryid], cb);
 	},
+	getPolicyByCategory: function(countryid, depttid, catid, cb){
+		const query = `select * from content where content_type = ? and deptt_id = ? and countryid = ? and catid = ? and publish_status = 1 and status = 1`;
+		return db.query(query, [3, depttid, countryid,  catid],cb);
+	},
 	getAnnouncement: function(countryid, depttid, cb){
 		var query = `select * from content where content_type = ? and deptt_id = ? and countryid = ? and publish_status = 1 and status = 1`;
 		//console.log(query);
@@ -69,8 +73,8 @@ where content.status = 1`
 		return db.query(query, callback);
 	},
 	addContent:function(objContent, callback){
-		const { content_type, countryid, title, short_desc, long_desc, content_image, create_author_id, update_author_id, deptt_id } = objContent;
-		return db.query("Insert into content(content_type, countryid, title, short_desc, long_desc, content_image, create_author_id, update_author_id, deptt_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)",[content_type, countryid, title, short_desc, long_desc, content_image, create_author_id, update_author_id, deptt_id],callback);
+		const { catid, content_type, countryid, title, short_desc, long_desc, content_image, create_author_id, update_author_id, deptt_id } = objContent;
+		return db.query("Insert into content(content_type, catid, countryid, title, short_desc, long_desc, content_image, create_author_id, update_author_id, deptt_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[content_type, catid, countryid, title, short_desc, long_desc, content_image, create_author_id, update_author_id, deptt_id],callback);
 	},
 	updateContent:function(objContent, callback){
 		const { content_type, countryid, title, short_desc, long_desc, content_image, update_author_id, deptt_id, contentid } = objContent;

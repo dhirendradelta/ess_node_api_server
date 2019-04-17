@@ -30,8 +30,8 @@
 			        <td>{{download.category}}</td>
 			        <td>{{download.description}}</td>
 			        <td>
-			        	<a ng-if="usertype == 2 && download.publish_status == 1" href="/download/unpublish/{{download.download_id}}" class="badge badge-success" >Unpublish</a>
-			        	<a ng-if="usertype == 2 && download.publish_status == 0"  href="/download/publish/{{download.download_id}}" class="badge badge-warning" >Publish</a>
+			        	<a ng-if="usertype == 2 && download.publish_status == 1" href="/download/unpublish/{{download.downloadid}}" class="badge badge-success" >Unpublish</a>
+			        	<a ng-if="usertype == 2 && download.publish_status == 0"  href="/download/publish/{{download.downloadid}}" class="badge badge-warning" >Publish</a>
 			        	<span ng-if="usertype == 1" >
 			        		<span class="badge badge-success" ng-if="download.publish_status == 1" >Published</span>
 			        		<span class="badge badge-success" ng-if="download.publish_status == 0" >Not Publish</span>
@@ -39,8 +39,8 @@
 			        </td>
 			        <td>{{download.department}}</td>
 			        <td>
-			        	<a href='/download/edit/{{download.download_id}}' class="fa fa-edit"></a>
-			        	<a href='/download/delete/{{download.download_id}}' class="fa fa-trash-o"></a>
+			        	<a href='/download/edit/{{download.downloadid}}' class="fa fa-edit"></a>
+			        	<a href='/download/delete/{{download.downloadid}}' class="fa fa-trash-o"></a>
 			        </td>
 			      </tr>
 			    </tbody>

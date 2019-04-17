@@ -5,28 +5,28 @@ var downloadCtrl = {
 		var query = `SELECT * from download_category where status = 1`
 		return db.query(query, callback);
 	},
-	getCountries:function(callback){
-		var query = `SELECT * from download_category where status = 1`
+	getVideoById: function(id, callback){
+		var query = "SELECT * from download where status = 1 and downloadid = "+id;
 		return db.query(query, callback);
 	},
-	getVideoById: function(id, callback){
-		var query = "SELECT * from download where status = 1 and download_id = "+id;
-		return db.query(query, callback);
+        getVideoByDepttCountry(typeid, depttid, countryid, cb){
+		const query = `select * from  download where download_type = ? and deptt_id = ? and country_id = ? and publish_status = 1 and status = 1`;
+		return db.query(query, [typeid, depttid, countryid], cb);
 	},
 	updateVideo:function(objContent, callback){
-		const { download_id, country_id, deptt_id, title, description, download_icon, download_type, download_video,create_author_id, update_author_id } = objContent;
-		return db.query("UPDATE download SET updated_date = now(), country_id = ?, deptt_id = ?, title = ?, description = ?, download_icon = ?, download_type = ?, download_video = ?,create_author_id = ?, update_author_id = ? where download_id = ?",[country_id, deptt_id, title, description, download_icon, download_type, download_video,create_author_id, update_author_id, download_id],callback);
+		const { downloadid, country_id, deptt_id, title, description, download_icon, download_type, download_video,create_author_id, update_author_id } = objContent;
+		return db.query("UPDATE download SET update_date = now(), country_id = ?, deptt_id = ?, title = ?, description = ?, download_icon = ?, download_type = ?, download_video = ?,create_author_id = ?, update_author_id = ? where downloadid = ?",[country_id, deptt_id, title, description, download_icon, download_type, download_video,create_author_id, update_author_id, downloadid],callback);
 	},
 	publishVideo: function(download_id, status,update_author_id, callback) {
-		return db.query("UPDATE download SET updated_date = now(), publish_status = ?, update_author_id = ? where download_id = ?",[status, update_author_id, download_id],callback);		
+		return db.query("UPDATE download SET update_date = now(), publish_status = ?, update_author_id = ? where downloadid = ?",[status, update_author_id, download_id],callback);		
 	},
 	deleteVideo: function(download_id, update_author_id, callback) {
-		return db.query("UPDATE download SET updated_date = now(), status = ?, update_author_id = ? where download_id = ?",[0, update_author_id, download_id],callback);		
+		return db.query("UPDATE download SET update_date = now(), status = ?, update_author_id = ? where downloadid = ?",[0, update_author_id, download_id],callback);		
 	},
 	getVideos:function(callback){
 		var query = `
 			SELECT 
-dw.download_id,
+dw.downloadid,
 dw.download_type,
 dcc.name as category,
 dw.download_icon,

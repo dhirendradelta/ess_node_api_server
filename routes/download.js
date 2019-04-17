@@ -3,7 +3,7 @@ const multer = require("multer");
 const { addUpload } = require("../controller/uploadCtrl")
 const { jwt_auth } = require('../middleware/index')
 const { jwt_decode } = require('../config/jwt')
-const {getCountries, getVideos, addVideo,publishVideo, deleteVideo,getVideoById,updateVideo} = require('../controller/downloadCtrl');
+const {getCountries, getVideoByDepttCountry, getVideos, addVideo,publishVideo, deleteVideo,getVideoById,updateVideo} = require('../controller/downloadCtrl');
 
 const apiRoutes = express.Router();
 
@@ -52,10 +52,23 @@ apiRoutes.get('/id/:downloadid', jwt_auth, (req, res)=>{
 });
 
 
+apiRoutes.get('/video/:typeid/:depttid/:countryid', jwt_auth, (req, res) => {
+  	console.log(11);
+	const {typeid, depttid, countryid} = req.params;
+        getVideoByDepttCountry(typeid, depttid, countryid, function(err, rows){
+		if(err){
+		  console.log(err);
+		  res.status(500).json({status: 0, msg: err});
+		} else {
+		  res.status(200).json({status: 1, videos: rows});
+		}
+	});
+});
+
 apiRoutes.get('/', jwt_auth, (req,res)=>{
 	getVideos(function(err, rows){
  		if(err){
- 			res.status(500).json({status: 0, msg: 'error'})
+ 			res.status(500).json({status: 0, msg: err})
  		}else{
  			res.status(200).json({status:1, video: rows})
  		}
@@ -174,7 +187,7 @@ apiRoutes.put('/:download_id', jwt_auth,  (req, res)=>{
 		res.status(200).json({status: 0, msg: errors});
 	}else{
 		const videoObj = {
-			download_id: download_id,
+			downloadid: download_id,
 			country_id: country_id,
 			deptt_id: deptt_id,
 			description: description,

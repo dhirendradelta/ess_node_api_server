@@ -31,7 +31,18 @@ const loginCtrl = (req, res)=>{
 							   u.deptt_id,
 							   d.name as department,
 							   u.country_id,
-                                                        
+                                                           p.EMPLOYEE_NUMBER,
+                       					   p.JOB_NAME,
+							   p.STORE_NAME,
+							   p.LOCATION,
+							   p.TYPE,
+							   p.NATIONALITY,
+							   p.Passport_EXPIRY_DATE,
+							   p.Iqama_Saudi_ID_EXPIRY_DATE,
+							   p.LAST_UPDATE_DATE,
+							   p.NATIONAL_IDENTIFIER,
+					 		   p.REGION,
+							   p.Line_Manager,
                                                            dp.name as designation,   
 							   c.country_name as country
 							from users u

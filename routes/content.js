@@ -1,7 +1,7 @@
 const express = require('express');
 const { jwt_auth } = require('../middleware/index')
 const { jwt_decode } = require('../config/jwt')
-const {getAnnouncement, getNewsIt, getPolicy, getContent,getAllContent,addContent,updateContent,publishContent,deleteContent} = require('../controller/contentCtrl');
+const {getAnnouncement, getNewsIt, getPolicy, getPolicyByCategory,  getContent,getAllContent,addContent,updateContent,publishContent,deleteContent} = require('../controller/contentCtrl');
 
 
 const apiRoutes = express.Router();
@@ -44,12 +44,23 @@ apiRoutes.get('/policy/:deptt_id/:country_id', jwt_auth, (req, res) => {
   });
 });
 
+apiRoutes.get('/policy/:deptt_id/:country_id/:catid', jwt_auth, (req, res) => {
+  const {deptt_id, country_id, catid} = req.params;
+  const userdata = jwt_decode(req);
+  getPolicyByCategory(country_id, deptt_id, catid, function(err, rows){
+  	if(err){
+	  res.status(500).json({status:0, msg: err});
+	}else{
+    	  res.status(200).json({status: 1, content: rows});
+	}
+  });
+});
 
 
 apiRoutes.post('/', jwt_auth,  (req, res)=>{
 	const userdata = jwt_decode(req);
 	var errors = [];		
-	const { content_type, title, countryid, short_desc, long_desc, content_image, deptt_id } = req.body;
+	const { content_type, catid, title, countryid, short_desc, long_desc, content_image, deptt_id } = req.body;
 	if(content_type == null){
 		errors.push("Please provide content type.")
 	}
@@ -75,6 +86,7 @@ apiRoutes.post('/', jwt_auth,  (req, res)=>{
 		res.status(200).json({status: 0, msg: errors});
 	}else{
 		const contentObj = {
+			catid: catid,
 			content_type: content_type, 
 			countryid: countryid,
 			title: title, 
