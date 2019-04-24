@@ -18,7 +18,7 @@ apiRoutes.get('/', jwt_auth, (req, res) => {
 apiRoutes.post('/', jwt_auth, (req, res) => {
   const userdata = jwt_decode(req);
   var errors = [];
-  const {photo, complain_desc, complain_employee, complain_product, complain_category} = req.body;
+  const {photo, complain_desc, complain_employee, complain_product, complain_category,mailname,email_id,country_id,mobileno,subject} = req.body;
   if(photo == null){
     errors.push("please provide pic");
   }
@@ -38,7 +38,8 @@ apiRoutes.post('/', jwt_auth, (req, res) => {
   if(errors.length){
     res.status(500).json({status:0, msg: errors});
   }else{
-    const complainObj = {userid: userdata.userid, photo: photo, complain_desc: complain_desc, complain_employee: complain_employee, complain_category: complain_category, complain_product: complain_product};
+   // const complainObj = {userid: userdata.userid, photo: photo, complain_desc: complain_desc, complain_employee: complain_employee, complain_category: complain_category, complain_product: complain_product};
+    const complainObj = {userid: userdata.userid, photo: photo, complain_desc: complain_desc, complain_employee: complain_employee, complain_category: complain_category, complain_product: complain_product,mailname:mailname,email_id:email_id,country_id:country_id,mobileno:mobileno,subject:subject};
     addComplain(complainObj, function(err, count){
       if(err){
         res.status(500).json({status:0, msg: err });
